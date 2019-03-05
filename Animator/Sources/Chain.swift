@@ -8,8 +8,8 @@
 
 import Foundation
 
-class Chain: Chainable {
-    weak var chain: Chain?
+public class Chain: Chainable, ChainsStorage {
+    public weak var chain: ChainsStorage?
     let chainGroup = DispatchGroup()
     let chainOperationQueue: OperationQueue = {
         let queue = OperationQueue()
@@ -17,9 +17,9 @@ class Chain: Chainable {
         return queue
     }()
     
-    var chains: [Chainable] = []
+    public var chains: [Chainable] = []
     
-    func perform(_ completion: @escaping () -> ()) {
+    public func perform(_ completion: @escaping () -> ()) {
         guard !chains.isEmpty else { return }
         let (enter, leave, wait) = ({ [weak self] () -> Void in self?.chainGroup.enter() },
                                     { [weak self] () -> Void in self?.chainGroup.leave() },

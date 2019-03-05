@@ -8,12 +8,12 @@
 
 import Foundation
 
-class Group: Chainable {
-    weak var chain: Chain?
+public class Group: Chainable, ChainsStorage {
+    public weak var chain: ChainsStorage?
     let group = DispatchGroup()
-    var chains: [Chainable] = []
+    public var chains: [Chainable] = []
     
-    func perform(_ completion: @escaping () -> ()) {
+    public func perform(_ completion: @escaping () -> ()) {
         chains.forEach { chain in group.enter(); chain.perform(group.leave) }
         group.wait()
         completion()

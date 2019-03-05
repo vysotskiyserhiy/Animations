@@ -8,11 +8,12 @@
 
 import Foundation
 
-protocol Chainable {
-    var chain: Chain? { get }
+public protocol ChainsStorage: class {
+    var chains: [Chainable] { get set }
+}
+
+public protocol Chainable {
+    var chain: ChainsStorage? { get }
     func perform(_ completion: @escaping () -> ())
 }
 
-extension Chainable {
-    
-}

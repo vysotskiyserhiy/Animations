@@ -9,27 +9,37 @@
 import UIKit
 
 extension Animation {
-    struct Config {
-        let duration: TimeInterval
-        let delay: TimeInterval
-        let damping: CGFloat
-        let velocity: CGFloat
-        let options: UIView.AnimationOptions
-        static let `default` = Config(duration: 0.3, delay: 0, damping: 0, velocity: 0, options: [])
+    public class Config {
+        public let duration: TimeInterval
+        public let delay: TimeInterval
+        public let damping: CGFloat
+        public let velocity: CGFloat
+        public let options: UIView.AnimationOptions
+        public static let `default` = Config(withDuration: 1)
+        
+        public init(withDuration duration: TimeInterval, delay: TimeInterval = 0, usingSpringWithDamping dampingRatio: CGFloat = 1, initialSpringVelocity velocity: CGFloat = 0, options: UIView.AnimationOptions = []) {
+            self.duration = duration
+            self.delay = delay
+            self.damping = dampingRatio
+            self.velocity = velocity
+            self.options = options
+        }
     }
 }
 
-struct Animation: Chainable {
-    weak var chain: Chain?
+public class Animation: Chainable {
+    public weak var chain: ChainsStorage?
+    public let config: Config
     let animations: () -> Void
-    let config: Config
+    var performed = false
     
-    init(_ animations: @escaping () -> Void, config: Config = .default) {
+    public init(_ animations: @escaping () -> Void, config: Config = .default) {
         self.animations = animations
         self.config = config
     }
     
-    func perform(_ completion: @escaping () -> ()) {
+    public func perform(_ completion: @escaping () -> () = {}) {
+        performed = true
         UIView.animate(
             withDuration: config.duration,
             delay: config.delay,
@@ -39,5 +49,17 @@ struct Animation: Chainable {
             animations: animations,
             completion: { _ in completion() }
         )
+    }
+    
+    deinit {
+        if !performed {
+            perform()
+        }
+    }
+}
+
+extension Animation {
+    func then() {
+        
     }
 }
