@@ -8,23 +8,40 @@
 
 import Foundation
 
-public class Chain: Chainable, ChainsStorage {
-    public weak var chain: ChainsStorage?
+public class Chain: Chainable {
+    public weak var chain: Chain?
+    public weak var group: Group?
+    
     let chainGroup = DispatchGroup()
-    let chainOperationQueue: OperationQueue = {
+    let workingQueue = DispatchQueue(label: UUID().uuidString, qos: .utility, autoreleaseFrequency: .workItem)
+    
+    lazy var chainOperationQueue: OperationQueue = {
         let queue = OperationQueue()
+        queue.underlyingQueue = workingQueue
         queue.maxConcurrentOperationCount = 1
         return queue
     }()
     
     public var chains: [Chainable] = []
+    public init() {}
     
     public func perform(_ completion: @escaping () -> ()) {
         guard !chains.isEmpty else { return }
         let (enter, leave, wait) = ({ [weak self] () -> Void in self?.chainGroup.enter() },
                                     { [weak self] () -> Void in self?.chainGroup.leave() },
                                     { [weak self] () -> Void in self?.chainGroup.wait()  })
-        chains.forEach { chain in chainOperationQueue.addOperation { enter(); chain.perform(leave); wait() } }
+        chains.forEach { chain in
+            chainOperationQueue.addOperation {
+                enter()
+                
+                DispatchQueue.main.async {
+                    chain.perform(leave)
+                }
+                
+                wait()
+            }
+        }
+        
         chainOperationQueue.addOperation {
             _ = self
             completion()

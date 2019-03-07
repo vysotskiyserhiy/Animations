@@ -8,15 +8,16 @@
 
 import Foundation
 
-class Block: Chainable {
+public class Block: Chainable {
     let block: () -> Void
-    weak var chain: ChainsStorage?
+    public weak var chain: Chain?
+    public weak var group: Group?
     
-    init(_ block: @escaping () -> Void) {
+    public init(_ block: @escaping () -> Void) {
         self.block = block
     }
     
-    func perform(_ completion: @escaping () -> ()) {
+    public func perform(_ completion: @escaping () -> ()) {
         block()
         completion()
     }

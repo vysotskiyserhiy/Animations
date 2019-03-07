@@ -8,19 +8,11 @@
 
 import UIKit.UIView
 
-extension UIView {
+extension UIAppearance where Self: UIView {
     @discardableResult
-    public func animate(withDuration duration: TimeInterval, delay: TimeInterval, options: UIView.AnimationOptions = [], animations: @escaping (UIView) -> Void) -> Animation {
-        return Animation({ [weak self] in self.map { animations($0) } }, config: Animation.Config(withDuration: duration, delay: delay, options: options))
-    }
-    
-    @discardableResult
-    public func animate(withDuration duration: TimeInterval, options: UIView.AnimationOptions = [], animations: @escaping (UIView) -> Void) -> Animation {
-        return Animation({ [weak self] in self.map { animations($0) } }, config: Animation.Config(withDuration: duration))
-    }
-    
-    @discardableResult
-    public func animate(withDuration duration: TimeInterval, delay: TimeInterval, usingSpringWithDamping dampingRatio: CGFloat, initialSpringVelocity velocity: CGFloat, options: UIView.AnimationOptions = [], animations: @escaping (UIView) -> Void) -> Animation {
-        return Animation({ [weak self] in self.map { animations($0) } }, config: Animation.Config(withDuration: duration, delay: delay, usingSpringWithDamping: dampingRatio, initialSpringVelocity: velocity, options: options))
+    public func animate(_ options: AnimatorOptions..., animations: @escaping (Self) -> Void) -> Animation {
+        let animationsBlock = { [weak self] () -> Void in self.map { animations($0) } }
+        let options = AnimationConfiguration(options)
+        return Animation(animationsBlock, configuration: options)
     }
 }
