@@ -9,8 +9,8 @@
 import UIKit
 
 public class Animation: Chainable {
-    public var chain: Chain?
-    public var group: Group?
+    public var next: Chainable?
+    public var current: Chainable?
     
     let configuration: AnimationConfiguration
     let animations: () -> Void
@@ -21,7 +21,7 @@ public class Animation: Chainable {
         self.configuration = configuration
     }
     
-    public func perform(_ completion: @escaping () -> () = {}) {
+    public func perform(_ completion: (() -> Void)?) {
         performed = true
         UIView.animate(
             withDuration: configuration.duration,
@@ -30,13 +30,13 @@ public class Animation: Chainable {
             initialSpringVelocity: configuration.velocity,
             options: configuration.options,
             animations: animations,
-            completion: { _ in completion() }
+            completion: { _ in completion?() }
         )
     }
     
     deinit {
         if !performed {
-            perform()
+            activateChain()
         }
     }
 }

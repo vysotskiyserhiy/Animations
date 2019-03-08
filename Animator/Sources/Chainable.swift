@@ -9,59 +9,69 @@
 import Foundation
 
 public protocol Chainable: class {
-    var chain: Chain? { set get }
-    var group: Group? { set get }
-    func perform(_ completion: @escaping () -> ())
+    var next: Chainable? { set get }
+    var current: Chainable? { set get }
+    func perform(_ completion: (() -> Void)?)
 }
 
 extension Chainable {
-    public func chain(with chainable: Self?) -> Self {
-        let isChainableGiven = chainable != nil
-        let chainableUnwrapped = chainable ?? self
+    public func activateChain() {
+        var current = self.current
+        let next = self.next
         
-        if let chain = chain {
-            chain.chains.append(chainableUnwrapped)
-        } else {
-            chain = Chain()
-            
-            if isChainableGiven {
-                chain!.chains.append(self)
-            }
-            
-            chain!.chains.append(chainableUnwrapped)
+        let group = DispatchGroup()
+        let queue = DispatchQueue(label: UUID().uuidString)
+        
+        group.enter()
+        perform {
+            group.leave()
         }
         
-        return chainableUnwrapped
-    }
-    
-    public func group(with chainable: Self?) -> Self {
-        let isChainableGiven = chainable != nil
-        let chainableUnwrapped = chainable ?? self
-        
-        if let group = group {
-            group.chains.append(chainableUnwrapped)
-        } else {
-            group = Group()
-            
-            if isChainableGiven {
-                group!.chains.append(self)
+        if let current = current {
+            group.enter()
+            current.perform {
+                group.leave()
             }
-            
-            group!.chains.append(chainableUnwrapped)
         }
         
-        return chainableUnwrapped
+        while (current?.current != nil) {
+            current = current?.current
+            
+            group.enter()
+            current?.perform {
+                group.leave()
+            }
+        }
+        
+        queue.async {
+            group.wait()
+            DispatchQueue.main.async {
+                next?.activateChain()
+            }
+        }
     }
 }
 
 extension Chainable {
     @discardableResult
-    public static func +(_ l: Self, r: Self) -> Self {
-        return l.chain(with: r)
+    public static func &&(_ l: Self, r: Self) -> Self {
+        l.next = r
+        return r
     }
     
     @discardableResult
-    public static func *(_ l: Self, r: Self) -> Self {
-        return l.group(with: r)
+    public static func ||(_ l: Self, r: Self) -> Self {
+        if l.current == nil {
+            l.current = r
+            return l
+        }
+        
+        var lastCurrent = l.current
+        while lastCurrent?.current != nil {
+            lastCurrent = lastCurrent?.current
+        }
+        
+        lastCurrent?.current = r
+        return l
     }
 }

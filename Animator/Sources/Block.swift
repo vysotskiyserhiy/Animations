@@ -10,15 +10,15 @@ import Foundation
 
 public class Block: Chainable {
     let block: () -> Void
-    public weak var chain: Chain?
-    public weak var group: Group?
+    public var next: Chainable?
+    public var current: Chainable?
     
     public init(_ block: @escaping () -> Void) {
         self.block = block
     }
     
-    public func perform(_ completion: @escaping () -> ()) {
+    public func perform(_ completion: (() -> Void)?) {
         block()
-        completion()
+        completion?()
     }
 }
