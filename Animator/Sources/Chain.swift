@@ -15,6 +15,8 @@ public class Chain: Chainable {
     let chainGroup = DispatchGroup()
     let workingQueue = DispatchQueue(label: UUID().uuidString, qos: .utility, autoreleaseFrequency: .workItem)
     
+    var performed = false
+    
     lazy var chainOperationQueue: OperationQueue = {
         let queue = OperationQueue()
         queue.underlyingQueue = workingQueue
@@ -23,15 +25,21 @@ public class Chain: Chainable {
     }()
     
     public var chains: [Chainable] = []
-    public init() {}
     
-    public func perform(_ completion: @escaping () -> ()) {
+    var initTime = CFAbsoluteTimeGetCurrent()
+    public init() {
+        print("INIT CHAIN")
+    }
+    
+    public func perform(_ completion: @escaping () -> () = {}) {
         guard !chains.isEmpty else { return }
         let (enter, leave, wait) = ({ [weak self] () -> Void in self?.chainGroup.enter() },
                                     { [weak self] () -> Void in self?.chainGroup.leave() },
                                     { [weak self] () -> Void in self?.chainGroup.wait()  })
+        
+        let operationQueue = chainOperationQueue
         chains.forEach { chain in
-            chainOperationQueue.addOperation {
+            operationQueue.addOperation {
                 enter()
                 
                 DispatchQueue.main.async {
@@ -42,9 +50,17 @@ public class Chain: Chainable {
             }
         }
         
-        chainOperationQueue.addOperation {
+        operationQueue.addOperation {
+            _ = operationQueue
             _ = self
             completion()
+        }
+    }
+    
+    deinit {
+        print("DEINIT CHAIN", CFAbsoluteTimeGetCurrent() - initTime)
+        if !performed {
+            perform()
         }
     }
 }

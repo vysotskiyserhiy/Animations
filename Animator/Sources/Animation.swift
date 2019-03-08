@@ -9,8 +9,8 @@
 import UIKit
 
 public class Animation: Chainable {
-    public weak var chain: Chain?
-    public weak var group: Group?
+    public var chain: Chain?
+    public var group: Group?
     
     let configuration: AnimationConfiguration
     let animations: () -> Void

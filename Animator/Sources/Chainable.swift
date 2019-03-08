@@ -15,7 +15,7 @@ public protocol Chainable: class {
 }
 
 extension Chainable {
-    public func chain(with chainable: Chainable?) -> Chainable {
+    public func chain(with chainable: Self?) -> Self {
         let isChainableGiven = chainable != nil
         let chainableUnwrapped = chainable ?? self
         
@@ -34,7 +34,7 @@ extension Chainable {
         return chainableUnwrapped
     }
     
-    public func group(with chainable: Chainable?) -> Chainable {
+    public func group(with chainable: Self?) -> Self {
         let isChainableGiven = chainable != nil
         let chainableUnwrapped = chainable ?? self
         
@@ -55,11 +55,13 @@ extension Chainable {
 }
 
 extension Chainable {
-    public static func +(_ l: Chainable, r: Chainable) -> Chainable {
+    @discardableResult
+    public static func +(_ l: Self, r: Self) -> Self {
         return l.chain(with: r)
     }
     
-    public static func +=(_ l: Chainable, r: Chainable) -> Chainable {
+    @discardableResult
+    public static func *(_ l: Self, r: Self) -> Self {
         return l.group(with: r)
     }
 }
