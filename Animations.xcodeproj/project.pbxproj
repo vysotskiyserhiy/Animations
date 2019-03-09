@@ -13,7 +13,7 @@
 		2A5217E32233C5BF00B19EEC /* Animations.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 2A5217E22233C5BF00B19EEC /* Animations.podspec */; };
 		2A9C01152229463300DC7D69 /* Animations.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A9C01132229463300DC7D69 /* Animations.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2A9C011F22294DDF00DC7D69 /* Chainable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9C011E22294DDF00DC7D69 /* Chainable.swift */; };
-		2A9C0125222956EF00DC7D69 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9C0124222956EF00DC7D69 /* UIViewExtensions.swift */; };
+		2A9C0125222956EF00DC7D69 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9C0124222956EF00DC7D69 /* UIKitExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,11 +21,11 @@
 		2A400D28223068D3001A7EFC /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		2A400D2A223068F5001A7EFC /* AnimationConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationConfiguration.swift; sourceTree = "<group>"; };
 		2A400D2C22306922001A7EFC /* AnimationOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationOptions.swift; sourceTree = "<group>"; };
-		2A5217E22233C5BF00B19EEC /* Animations.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Animations.podspec; sourceTree = SOURCE_ROOT; };
+		2A5217E22233C5BF00B19EEC /* Animations.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Animations.podspec; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		2A9C01102229463300DC7D69 /* Animations.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Animations.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A9C01132229463300DC7D69 /* Animations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Animations.h; sourceTree = "<group>"; };
 		2A9C011E22294DDF00DC7D69 /* Chainable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chainable.swift; sourceTree = "<group>"; };
-		2A9C0124222956EF00DC7D69 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
+		2A9C0124222956EF00DC7D69 /* UIKitExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +73,7 @@
 				2A400D2A223068F5001A7EFC /* AnimationConfiguration.swift */,
 				2A400D28223068D3001A7EFC /* Animation.swift */,
 				2A9C011E22294DDF00DC7D69 /* Chainable.swift */,
-				2A9C0124222956EF00DC7D69 /* UIViewExtensions.swift */,
+				2A9C0124222956EF00DC7D69 /* UIKitExtensions.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -158,7 +158,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A9C0125222956EF00DC7D69 /* UIViewExtensions.swift in Sources */,
+				2A9C0125222956EF00DC7D69 /* UIKitExtensions.swift in Sources */,
 				2A400D2B223068F5001A7EFC /* AnimationConfiguration.swift in Sources */,
 				2A400D2D22306922001A7EFC /* AnimationOptions.swift in Sources */,
 				2A400D29223068D3001A7EFC /* Animation.swift in Sources */,

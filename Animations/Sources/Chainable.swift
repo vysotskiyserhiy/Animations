@@ -49,19 +49,19 @@ extension Chainable {
         return r
     }
     
-    @discardableResult
-    public static func ||(_ l: Self, r: Self) -> Self {
-        if l.current == nil {
-            l.current = r
-            return l
-        }
-        
-        var lastCurrent = l.current
-        while lastCurrent?.current != nil {
-            lastCurrent = lastCurrent?.current
-        }
-        
-        lastCurrent?.current = r
-        return l
-    }
+//    @discardableResult
+//    public static func ||(_ l: Self, r: Self) -> Self {
+//        if l.current == nil {
+//            l.current = r
+//            return l
+//        }
+//
+//        var lastCurrent = l.current
+//        while lastCurrent?.current != nil {
+//            lastCurrent = lastCurrent?.current
+//        }
+//
+//        lastCurrent?.current = r
+//        return l
+//    }
 }

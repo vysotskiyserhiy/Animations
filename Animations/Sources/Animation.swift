@@ -38,7 +38,7 @@ public class Animation: Chainable {
     }
     
     deinit {
-        if !performed {
+        if !performed && true {
             activateChain()
         }
     }
