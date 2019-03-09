@@ -14,15 +14,18 @@ public class Animation: Chainable {
     
     let configuration: AnimationConfiguration
     let animations: () -> Void
+    let completion: (() -> Void)?
     var performed = false
     
-    init(_ animations: @escaping () -> Void, configuration: AnimationConfiguration) {
+    init(_ animations: @escaping () -> Void, configuration: AnimationConfiguration, completion: (() -> Void)?) {
         self.animations = animations
+        self.completion = completion
         self.configuration = configuration
     }
     
     public func perform(_ completion: (() -> Void)?) {
         performed = true
+        let localCompletion = self.completion
         UIView.animate(
             withDuration: configuration.duration,
             delay: configuration.delay,
@@ -30,7 +33,7 @@ public class Animation: Chainable {
             initialSpringVelocity: configuration.velocity,
             options: configuration.options,
             animations: animations,
-            completion: { _ in completion?() }
+            completion: { _ in completion?(); localCompletion?() }
         )
     }
     

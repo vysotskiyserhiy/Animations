@@ -27,20 +27,10 @@ extension Chainable {
             group.leave()
         }
         
-        if let current = current {
+        while current != nil {
             group.enter()
-            current.perform {
-                group.leave()
-            }
-        }
-        
-        while (current?.current != nil) {
+            current?.perform(group.leave)
             current = current?.current
-            
-            group.enter()
-            current?.perform {
-                group.leave()
-            }
         }
         
         queue.async {

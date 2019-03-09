@@ -10,9 +10,9 @@ import UIKit.UIView
 
 extension UIAppearance where Self: UIView {
     @discardableResult
-    public func animate(_ options: AnimatorOptions..., animations: @escaping (Self) -> Void) -> Animation {
+    public func animate(_ options: AnimatorOptions..., animations: @escaping (Self) -> Void, completion: (() -> Void)? = nil) -> Animation {
         let animationsBlock = { [weak self] () -> Void in self.map { animations($0) } }
         let options = AnimationConfiguration(options)
-        return Animation(animationsBlock, configuration: options)
+        return Animation(animationsBlock, configuration: options, completion: completion)
     }
 }
