@@ -10,7 +10,7 @@
 		2A400D29223068D3001A7EFC /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A400D28223068D3001A7EFC /* Animation.swift */; };
 		2A400D2B223068F5001A7EFC /* AnimationConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A400D2A223068F5001A7EFC /* AnimationConfiguration.swift */; };
 		2A400D2D22306922001A7EFC /* AnimationOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A400D2C22306922001A7EFC /* AnimationOptions.swift */; };
-		2A9C01152229463300DC7D69 /* Animator.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A9C01132229463300DC7D69 /* Animator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2A9C01152229463300DC7D69 /* Animations.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A9C01132229463300DC7D69 /* Animations.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2A9C011F22294DDF00DC7D69 /* Chainable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9C011E22294DDF00DC7D69 /* Chainable.swift */; };
 		2A9C0125222956EF00DC7D69 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9C0124222956EF00DC7D69 /* UIViewExtensions.swift */; };
 /* End PBXBuildFile section */
@@ -20,8 +20,8 @@
 		2A400D28223068D3001A7EFC /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		2A400D2A223068F5001A7EFC /* AnimationConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationConfiguration.swift; sourceTree = "<group>"; };
 		2A400D2C22306922001A7EFC /* AnimationOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationOptions.swift; sourceTree = "<group>"; };
-		2A9C01102229463300DC7D69 /* Animator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Animator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2A9C01132229463300DC7D69 /* Animator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Animator.h; sourceTree = "<group>"; };
+		2A9C01102229463300DC7D69 /* Animations.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Animations.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A9C01132229463300DC7D69 /* Animations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Animations.h; sourceTree = "<group>"; };
 		2A9C011E22294DDF00DC7D69 /* Chainable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chainable.swift; sourceTree = "<group>"; };
 		2A9C0124222956EF00DC7D69 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -40,7 +40,7 @@
 		2A9C01062229463200DC7D69 = {
 			isa = PBXGroup;
 			children = (
-				2A9C01122229463300DC7D69 /* Animator */,
+				2A9C01122229463300DC7D69 /* Animations */,
 				2A9C01112229463300DC7D69 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -48,19 +48,19 @@
 		2A9C01112229463300DC7D69 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2A9C01102229463300DC7D69 /* Animator.framework */,
+				2A9C01102229463300DC7D69 /* Animations.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2A9C01122229463300DC7D69 /* Animator */ = {
+		2A9C01122229463300DC7D69 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
 				2A9C011B2229465A00DC7D69 /* Sources */,
-				2A9C01132229463300DC7D69 /* Animator.h */,
+				2A9C01132229463300DC7D69 /* Animations.h */,
 				2A17BD63222980140089BFE6 /* Info.plist */,
 			);
-			path = Animator;
+			path = Animations;
 			sourceTree = "<group>";
 		};
 		2A9C011B2229465A00DC7D69 /* Sources */ = {
@@ -82,16 +82,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A9C01152229463300DC7D69 /* Animator.h in Headers */,
+				2A9C01152229463300DC7D69 /* Animations.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		2A9C010F2229463300DC7D69 /* Animator */ = {
+		2A9C010F2229463300DC7D69 /* Animations */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2A9C01182229463300DC7D69 /* Build configuration list for PBXNativeTarget "Animator" */;
+			buildConfigurationList = 2A9C01182229463300DC7D69 /* Build configuration list for PBXNativeTarget "Animations" */;
 			buildPhases = (
 				2A9C010B2229463300DC7D69 /* Headers */,
 				2A9C010C2229463300DC7D69 /* Sources */,
@@ -102,9 +102,9 @@
 			);
 			dependencies = (
 			);
-			name = Animator;
+			name = Animations;
 			productName = Animator;
-			productReference = 2A9C01102229463300DC7D69 /* Animator.framework */;
+			productReference = 2A9C01102229463300DC7D69 /* Animations.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -122,7 +122,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2A9C010A2229463200DC7D69 /* Build configuration list for PBXProject "Animator" */;
+			buildConfigurationList = 2A9C010A2229463200DC7D69 /* Build configuration list for PBXProject "Animations" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -134,7 +134,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2A9C010F2229463300DC7D69 /* Animator */,
+				2A9C010F2229463300DC7D69 /* Animations */,
 			);
 		};
 /* End PBXProject section */
@@ -345,7 +345,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2A9C010A2229463200DC7D69 /* Build configuration list for PBXProject "Animator" */ = {
+		2A9C010A2229463200DC7D69 /* Build configuration list for PBXProject "Animations" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2A9C01162229463300DC7D69 /* Debug */,
@@ -354,7 +354,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2A9C01182229463300DC7D69 /* Build configuration list for PBXNativeTarget "Animator" */ = {
+		2A9C01182229463300DC7D69 /* Build configuration list for PBXNativeTarget "Animations" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2A9C01192229463300DC7D69 /* Debug */,
