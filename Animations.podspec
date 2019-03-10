@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name             = 'Animations'
-  s.version          = '0.0.4'
-  s.summary          = 'Animations &&/|| syntax sugar'
+  s.version          = '0.0.5'
+  s.summary          = 'Chaining animations && syntax sugar'
   s.homepage         = 'https://github.com/vysotskiyserhiy/Animations.git'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Serhiy Vysotskiy' => 'vysotskiyserhiy@gmail.com' }
