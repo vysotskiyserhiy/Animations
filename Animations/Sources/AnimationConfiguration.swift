@@ -11,12 +11,12 @@ import UIKit
 class AnimationConfiguration {
     private(set) var duration: TimeInterval
     private(set) var delay: TimeInterval
-    private(set) var damping: CGFloat
-    private(set) var velocity: CGFloat
+    private(set) var damping: CGFloat?
+    private(set) var velocity: CGFloat?
     private(set) var options: UIView.AnimationOptions
     static let `default` = AnimationConfiguration(withDuration: 0.3)
     
-    init(withDuration duration: TimeInterval, delay: TimeInterval = 0, usingSpringWithDamping dampingRatio: CGFloat = 1, initialSpringVelocity velocity: CGFloat = 0, options: UIView.AnimationOptions = []) {
+    init(withDuration duration: TimeInterval, delay: TimeInterval = 0, usingSpringWithDamping dampingRatio: CGFloat? = nil, initialSpringVelocity velocity: CGFloat? = nil, options: UIView.AnimationOptions = []) {
         self.duration = duration
         self.delay = delay
         self.damping = dampingRatio

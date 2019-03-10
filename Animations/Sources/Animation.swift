@@ -26,15 +26,28 @@ public class Animation: Chainable {
     public func perform(_ completion: (() -> Void)?) {
         performed = true
         let localCompletion = self.completion
-        UIView.animate(
-            withDuration: configuration.duration,
-            delay: configuration.delay,
-            usingSpringWithDamping: configuration.damping,
-            initialSpringVelocity: configuration.velocity,
-            options: configuration.options,
-            animations: animations,
-            completion: { _ in completion?(); localCompletion?() }
-        )
+        
+        let onComplete: (Bool) -> Void = { _ in completion?(); localCompletion?() }
+        
+        if configuration.damping != nil || configuration.velocity != nil {
+            UIView.animate(
+                withDuration: configuration.duration,
+                delay: configuration.delay,
+                usingSpringWithDamping: configuration.damping ?? 1,
+                initialSpringVelocity: configuration.velocity ?? 0,
+                options: configuration.options,
+                animations: animations,
+                completion: onComplete
+            )
+        } else {
+            UIView.animate(
+                withDuration: configuration.duration,
+                delay: configuration.delay,
+                options: configuration.options,
+                animations: animations,
+                completion: onComplete
+            )
+        }
     }
     
     deinit {
