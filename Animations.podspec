@@ -8,5 +8,6 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/vysotskiyserhiy/Animations.git', :tag => s.version.to_s }
   s.ios.deployment_target = '10.0'
   s.source_files = 'Animations/Sources/**/*'
+  s.swift_versions = '4.2'
   s.frameworks = 'UIKit'
 end
