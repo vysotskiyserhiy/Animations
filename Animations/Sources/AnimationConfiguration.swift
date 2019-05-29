@@ -14,18 +14,19 @@ class AnimationConfiguration {
     private(set) var damping: CGFloat?
     private(set) var velocity: CGFloat?
     private(set) var options: UIView.AnimationOptions
-    static let `default` = AnimationConfiguration(withDuration: 0.3)
+    private(set) var completion: (() -> Void)?
     
-    init(withDuration duration: TimeInterval, delay: TimeInterval = 0, usingSpringWithDamping dampingRatio: CGFloat? = nil, initialSpringVelocity velocity: CGFloat? = nil, options: UIView.AnimationOptions = []) {
+    init(withDuration duration: TimeInterval, delay: TimeInterval = 0, usingSpringWithDamping dampingRatio: CGFloat? = nil, initialSpringVelocity velocity: CGFloat? = nil, options: UIView.AnimationOptions = [], completion: (() -> Void)? = nil) {
         self.duration = duration
         self.delay = delay
         self.damping = dampingRatio
         self.velocity = velocity
         self.options = options
+        self.completion = completion
     }
     
     convenience init(_ options: [AnimatorOptions]) {
-        self.init(withDuration: 0)
+        self.init(withDuration: 0.3)
         
         var animationOptions: UIView.AnimationOptions = []
         
@@ -41,6 +42,8 @@ class AnimationConfiguration {
                 self.velocity = velocity
             case let .options(options):
                 animationOptions.formUnion(options)
+            case let .complete(block):
+                self.completion = block
             }
         }
         

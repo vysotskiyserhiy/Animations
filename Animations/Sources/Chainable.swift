@@ -42,26 +42,17 @@ extension Chainable {
     }
 }
 
-extension Chainable {
+infix operator <<<: AdditionPrecedence
+public extension Chainable {
     @discardableResult
-    public static func &&(_ l: Self, r: Self) -> Self {
-        l.next = r
-        return r
+    func chain(_ chain: Self) -> Self {
+        next = chain
+        return chain
     }
     
-//    @discardableResult
-//    public static func ||(_ l: Self, r: Self) -> Self {
-//        if l.current == nil {
-//            l.current = r
-//            return l
-//        }
-//
-//        var lastCurrent = l.current
-//        while lastCurrent?.current != nil {
-//            lastCurrent = lastCurrent?.current
-//        }
-//
-//        lastCurrent?.current = r
-//        return l
-//    }
+    @discardableResult
+    static func <<< (_ l: Self, r: Self) -> Self {
+        return l.chain(r)
+    }
 }
+

@@ -26,8 +26,9 @@ public class Animation: Chainable {
     public func perform(_ completion: (() -> Void)?) {
         performed = true
         let localCompletion = self.completion
+        let configurationCompletion = configuration.completion
         
-        let onComplete: (Bool) -> Void = { _ in completion?(); localCompletion?() }
+        let onComplete: (Bool) -> Void = { _ in completion?(); localCompletion?(); configurationCompletion?() }
         
         if configuration.damping != nil || configuration.velocity != nil {
             UIView.animate(
