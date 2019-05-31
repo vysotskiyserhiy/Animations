@@ -9,25 +9,14 @@
 import UIKit
 
 class AnimationConfiguration {
-    private(set) var duration: TimeInterval
-    private(set) var delay: TimeInterval
+    private(set) var duration: TimeInterval = 0.3
+    private(set) var delay: TimeInterval = 0
     private(set) var damping: CGFloat?
     private(set) var velocity: CGFloat?
     private(set) var options: UIView.AnimationOptions
     private(set) var completion: (() -> Void)?
     
-    init(withDuration duration: TimeInterval, delay: TimeInterval = 0, usingSpringWithDamping dampingRatio: CGFloat? = nil, initialSpringVelocity velocity: CGFloat? = nil, options: UIView.AnimationOptions = [], completion: (() -> Void)? = nil) {
-        self.duration = duration
-        self.delay = delay
-        self.damping = dampingRatio
-        self.velocity = velocity
-        self.options = options
-        self.completion = completion
-    }
-    
-    convenience init(_ options: [AnimatorOptions]) {
-        self.init(withDuration: 0.3)
-        
+    init(_ options: [AnimatorOptions]) {
         var animationOptions: UIView.AnimationOptions = []
         
         for option in options {

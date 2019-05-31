@@ -15,12 +15,17 @@ extension UIViewController: Animator {}
 
 public extension Animator {
     @discardableResult
-    func animate(_ options: AnimatorOptions..., animations: @escaping (Self) -> Void, completion: ((Self) -> Void)? = nil) -> Animation {
+    func animate(_ options: AnimatorOptions..., animations: @escaping (Self) -> Void) -> Animation {
+        return animate(options: options, animations: animations, completion: nil)
+    }
+    
+    @discardableResult
+    func animate(_ options: AnimatorOptions..., animations: @escaping (Self) -> Void, completion: @escaping (Self) -> Void) -> Animation {
         return animate(options: options, animations: animations, completion: completion)
     }
     
     @discardableResult
-    func animate(options: [AnimatorOptions], animations: @escaping (Self) -> Void, completion: ((Self) -> Void)? = nil) -> Animation {
+    func animate(options: [AnimatorOptions], animations: @escaping (Self) -> Void, completion: ((Self) -> Void)?) -> Animation {
         let animationsBlock = { [weak self] () -> Void in self.map { animations($0) } }
         let completionBlock = { [weak self] () -> Void in self.map { completion?($0) } }
         let options = AnimationConfiguration(options)
@@ -30,9 +35,9 @@ public extension Animator {
 
 public extension Animator where Self: UIView {
     @discardableResult
-    func animate(_ options: AnimatorOptions..., animation: CommonAnimations, completion: ((Self) -> Void)? = nil) -> Animation {
+    func animate(_ options: AnimatorOptions..., animate common: CommonAnimations, completion: ((Self) -> Void)? = nil) -> Animation {
         return animate(options: options, animations: { (view) in
-            switch animation {
+            switch common {
             case let .transform(transform):
                 view.transform = transform
             case let .alpha(alpha):
@@ -47,6 +52,8 @@ public extension Animator where Self: UIView {
                 view.center = center
             case let .color(color):
                 view.backgroundColor = color
+            case .layoutIfNeeded:
+                view.superview?.layoutIfNeeded()
             }
         }, completion: completion)
     }

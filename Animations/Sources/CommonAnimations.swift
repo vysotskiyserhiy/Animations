@@ -16,4 +16,5 @@ public enum CommonAnimations {
     case origin(CGPoint)
     case center(CGPoint)
     case color(UIColor)
+    case layoutIfNeeded
 }
