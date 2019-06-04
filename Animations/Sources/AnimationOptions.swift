@@ -14,7 +14,7 @@ public enum AnimatorOptions {
     case damping(CGFloat)
     case velocity(CGFloat)
     case options(UIView.AnimationOptions)
-    case complete(() -> Void)
+    case complete((() -> Void)?)
 }
 
 
