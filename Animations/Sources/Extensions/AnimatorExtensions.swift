@@ -8,11 +8,6 @@
 
 import UIKit
 
-public protocol Animator: class {}
-
-extension UIView: Animator {}
-extension UIViewController: Animator {}
-
 public extension Animator {
     @discardableResult
     func animate(_ options: AnimatorOptions..., animations: @escaping (Self) -> Void) -> Animation {
@@ -35,26 +30,17 @@ public extension Animator {
 
 public extension Animator where Self: UIView {
     @discardableResult
-    func animate(_ options: AnimatorOptions..., animate common: CommonAnimations, completion: ((Self) -> Void)? = nil) -> Animation {
-        return animate(options: options, animations: { (view) in
-            switch common {
-            case let .transform(transform):
-                view.transform = transform
-            case let .alpha(alpha):
-                view.alpha = alpha
-            case let .frame(frame):
-                view.frame = frame
-            case let .size(size):
-                view.frame.size = size
-            case let .origin(origin):
-                view.frame.origin = origin
-            case let .center(center):
-                view.center = center
-            case let .color(color):
-                view.backgroundColor = color
-            case .layoutIfNeeded:
-                view.superview?.layoutIfNeeded()
-            }
-        }, completion: completion)
+    func animate(_ options: AnimatorOptions..., animate common: CommonAnimations) -> Animation {
+        return animate(options, animate: common, completion: nil)
+    }
+    
+    @discardableResult
+    func animate(_ options: AnimatorOptions..., animate common: CommonAnimations, completion: @escaping (Self) -> Void) -> Animation {
+        return animate(options, animate: common, completion: completion)
+    }
+    
+    @discardableResult
+    func animate(_ options: [AnimatorOptions], animate common: CommonAnimations, completion: ((Self) -> Void)? = nil) -> Animation {
+        return animate(options: options, animations: common.animationBlock, completion: completion)
     }
 }

@@ -14,7 +14,9 @@
 		2A5217E32233C5BF00B19EEC /* Animations.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 2A5217E22233C5BF00B19EEC /* Animations.podspec */; };
 		2A9C01152229463300DC7D69 /* Animations.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A9C01132229463300DC7D69 /* Animations.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2A9C011F22294DDF00DC7D69 /* Chainable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9C011E22294DDF00DC7D69 /* Chainable.swift */; };
-		2A9C0125222956EF00DC7D69 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9C0124222956EF00DC7D69 /* UIKitExtensions.swift */; };
+		2A9C0125222956EF00DC7D69 /* AnimatorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9C0124222956EF00DC7D69 /* AnimatorExtensions.swift */; };
+		2ABDCA7422C4F49200E00ECF /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABDCA7322C4F49200E00ECF /* Animator.swift */; };
+		2ABDCA7622C4F53900E00ECF /* Animator+UIViewPropertyAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABDCA7522C4F53900E00ECF /* Animator+UIViewPropertyAnimator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +29,9 @@
 		2A9C01102229463300DC7D69 /* Animations.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Animations.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A9C01132229463300DC7D69 /* Animations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Animations.h; sourceTree = "<group>"; };
 		2A9C011E22294DDF00DC7D69 /* Chainable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chainable.swift; sourceTree = "<group>"; };
-		2A9C0124222956EF00DC7D69 /* UIKitExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
+		2A9C0124222956EF00DC7D69 /* AnimatorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatorExtensions.swift; sourceTree = "<group>"; };
+		2ABDCA7322C4F49200E00ECF /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
+		2ABDCA7522C4F53900E00ECF /* Animator+UIViewPropertyAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Animator+UIViewPropertyAnimator.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,14 +75,48 @@
 		2A9C011B2229465A00DC7D69 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				2A400D2C22306922001A7EFC /* AnimationOptions.swift */,
-				2A268451229EF635003B63C6 /* CommonAnimations.swift */,
-				2A400D2A223068F5001A7EFC /* AnimationConfiguration.swift */,
-				2A400D28223068D3001A7EFC /* Animation.swift */,
-				2A9C011E22294DDF00DC7D69 /* Chainable.swift */,
-				2A9C0124222956EF00DC7D69 /* UIKitExtensions.swift */,
+				2ABDCA6F22C4F45300E00ECF /* Enums */,
+				2ABDCA7022C4F46100E00ECF /* Animation */,
+				2ABDCA7122C4F46800E00ECF /* Protocols */,
+				2ABDCA7222C4F47000E00ECF /* Extensions */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		2ABDCA6F22C4F45300E00ECF /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				2A400D2C22306922001A7EFC /* AnimationOptions.swift */,
+				2A268451229EF635003B63C6 /* CommonAnimations.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		2ABDCA7022C4F46100E00ECF /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				2A400D28223068D3001A7EFC /* Animation.swift */,
+				2A400D2A223068F5001A7EFC /* AnimationConfiguration.swift */,
+			);
+			path = Animation;
+			sourceTree = "<group>";
+		};
+		2ABDCA7122C4F46800E00ECF /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				2A9C011E22294DDF00DC7D69 /* Chainable.swift */,
+				2ABDCA7322C4F49200E00ECF /* Animator.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		2ABDCA7222C4F47000E00ECF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2A9C0124222956EF00DC7D69 /* AnimatorExtensions.swift */,
+				2ABDCA7522C4F53900E00ECF /* Animator+UIViewPropertyAnimator.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,12 +199,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A9C0125222956EF00DC7D69 /* UIKitExtensions.swift in Sources */,
+				2A9C0125222956EF00DC7D69 /* AnimatorExtensions.swift in Sources */,
 				2A268452229EF635003B63C6 /* CommonAnimations.swift in Sources */,
 				2A400D2B223068F5001A7EFC /* AnimationConfiguration.swift in Sources */,
 				2A400D2D22306922001A7EFC /* AnimationOptions.swift in Sources */,
 				2A400D29223068D3001A7EFC /* Animation.swift in Sources */,
+				2ABDCA7422C4F49200E00ECF /* Animator.swift in Sources */,
 				2A9C011F22294DDF00DC7D69 /* Chainable.swift in Sources */,
+				2ABDCA7622C4F53900E00ECF /* Animator+UIViewPropertyAnimator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
