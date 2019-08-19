@@ -14,10 +14,10 @@ public class Animation: Chainable {
     
     let configuration: AnimationConfiguration
     let animations: () -> Void
-    let completion: (() -> Void)?
+    let completion: ((Bool) -> Void)?
     var performed = false
     
-    init(_ animations: @escaping () -> Void, configuration: AnimationConfiguration, completion: (() -> Void)?) {
+    init(_ animations: @escaping () -> Void, configuration: AnimationConfiguration, completion: ((Bool) -> Void)?) {
         self.animations = animations
         self.completion = completion
         self.configuration = configuration
@@ -28,8 +28,7 @@ public class Animation: Chainable {
         let localCompletion = self.completion
         let configurationCompletion = configuration.completion
         
-        let onComplete: (Bool) -> Void = { _ in completion?(); localCompletion?(); configurationCompletion?() }
-        
+        let onComplete: (Bool) -> Void = { (success) in completion?(); localCompletion?(success); configurationCompletion?() }
         if configuration.damping != nil || configuration.velocity != nil {
             UIView.animate(
                 withDuration: configuration.duration,
