@@ -9,6 +9,7 @@
 import UIKit
 
 public enum CommonAnimations {
+    case cgFloat(ReferenceWritableKeyPath<UIView, CGFloat>, CGFloat)
     case transform(CGAffineTransform)
     case alpha(CGFloat)
     case frame(CGRect)
@@ -40,6 +41,8 @@ extension CommonAnimations {
                 view.backgroundColor = color
             case .layoutIfNeeded:
                 view.superview?.layoutIfNeeded()
+            case let .cgFloat(path, value):
+                view[keyPath: path] = value
             }
         }
     }
