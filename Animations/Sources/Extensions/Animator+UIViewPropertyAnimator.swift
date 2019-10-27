@@ -41,12 +41,12 @@ public extension Animator {
 }
 
 public extension Animator where Self: UIView {
-    func animator(duration: TimeInterval, timing: PropertyAnimatorTiming, animate common: CommonAnimations) -> UIViewPropertyAnimator {
-        return animator(duration: duration, timing: timing, animations: common.animationBlock)
+    func animator(duration: TimeInterval, timing: PropertyAnimatorTiming, animate commons: CommonAnimations...) -> UIViewPropertyAnimator {
+        return animator(duration: duration, timing: timing, animations: { view in commons.forEach { $0.animationBlock(view) } })
     }
     
-    func animator(duration: TimeInterval, timing: PropertyAnimatorTiming, animate common: CommonAnimations, completion: @escaping (Self, UIViewAnimatingPosition) -> Void) -> UIViewPropertyAnimator {
-        return animator(duration: duration, timing: timing, animations: common.animationBlock, completion: completion)
+    func animator(duration: TimeInterval, timing: PropertyAnimatorTiming, animate commons: CommonAnimations..., completion: @escaping (Self, UIViewAnimatingPosition) -> Void) -> UIViewPropertyAnimator {
+        return animator(duration: duration, timing: timing, animations: { view in commons.forEach { $0.animationBlock(view) } }, completion: completion)
     }
 }
 
